@@ -1,7 +1,8 @@
+import 'package:cpf_generator/cpf/models/cpf_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../utils/cpf_tools/cpf_generator.dart';
+import '../utils/cpf_tools/cpf_tools.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -18,7 +19,7 @@ class _HomePageState extends State<HomePage>
   late Animation _animation;
 
   int _newCPF = 0;
-  int _oldCPF = int.parse(generateRandomCPF());
+  int _oldCPF = Cpf.random().cpfValue;
   bool _isMasked = true;
 
   @override
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage>
 
   void _animateCPF() {
     setState(() {
-      _newCPF = int.parse(generateRandomCPF());
+      _newCPF = Cpf.random().cpfValue;
       _animation = IntTween(
         begin: _oldCPF,
         end: _newCPF,
