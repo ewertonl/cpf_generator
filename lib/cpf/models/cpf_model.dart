@@ -7,8 +7,8 @@ class Cpf {
 
   int get cpfValue => cpf_tools.digitsToCpfValue(digits);
 
-  // TODO: implement region
-  String get region => throw UnimplementedError();
+  int get regionDigit => digits[8];
+  String get region => cpf_tools.cpfRegion(regionDigit);
 
   factory Cpf.random() {
     return Cpf(digits: cpf_tools.generateRandomCPF());
