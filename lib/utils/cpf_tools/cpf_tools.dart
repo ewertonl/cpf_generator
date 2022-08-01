@@ -45,3 +45,8 @@ List<int> generateRandomCPF() {
   cpfNumbers = [...cpfNumbers, ...getCheckDigits(cpfNumbers)];
   return cpfNumbers;
 }
+
+String maskCPFValue(int cpfValue) {
+  String cpfString = cpfValue.toString().padLeft(11, '0');
+  return "${cpfString.substring(0, 3)}.${cpfString.substring(3, 6)}.${cpfString.substring(6, 9)}-${cpfString.substring(9, 11)}";
+}
