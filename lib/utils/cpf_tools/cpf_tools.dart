@@ -36,6 +36,10 @@ List<int> generateCPF(List<int> numberList) {
   return cpfNumbers;
 }
 
+int digitsToCpfValue(List<int> digits) {
+  return digits.reduce((value, element) => 10 * value + element);
+}
+
 List<int> generateRandomCPF() {
   List<int> cpfNumbers = randomNumberList();
   cpfNumbers = [...cpfNumbers, ...getCheckDigits(cpfNumbers)];
