@@ -1,4 +1,4 @@
-import 'package:cpf_generator/utils/cpf_tools/cpf_generator.dart';
+import 'package:cpf_generator/utils/cpf_tools/cpf_tools.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
