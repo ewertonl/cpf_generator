@@ -5,8 +5,7 @@ class Cpf {
 
   final List<int> digits;
 
-  // TODO: implement cpf integer value from integer list
-  int get cpfValue => throw UnimplementedError();
+  int get cpfValue => cpf_tools.digitsToCpfValue(digits);
 
   // TODO: implement region
   String get region => throw UnimplementedError();
