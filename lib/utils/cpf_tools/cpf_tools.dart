@@ -30,14 +30,14 @@ int calculateCheckDigit(List<int> numberList, bool isFristDigit) {
   return result > 9 ? 0 : result;
 }
 
-String generateCPF(List<int> numberList) {
+List<int> generateCPF(List<int> numberList) {
   List<int> cpfNumbers = numberList;
   cpfNumbers = [...cpfNumbers, ...getCheckDigits(cpfNumbers)];
-  return cpfNumbers.join('');
+  return cpfNumbers;
 }
 
-String generateRandomCPF() {
+List<int> generateRandomCPF() {
   List<int> cpfNumbers = randomNumberList();
   cpfNumbers = [...cpfNumbers, ...getCheckDigits(cpfNumbers)];
-  return cpfNumbers.join('');
+  return cpfNumbers;
 }
