@@ -2,9 +2,7 @@
 
 Um simples gerador de CPF feito em flutter.
 
-
-![cpf_generator](https://user-images.githubusercontent.com/79954630/182473632-edc4964a-d20f-4226-a53e-f96477d08a7e.gif)
-
+![cpf_generator](https://user-images.githubusercontent.com/79954630/182475178-a1fc92eb-2fd4-4e44-90d4-1370c8d496c9.gif)
 
 ## Rodando o app
 
