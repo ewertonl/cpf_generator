@@ -1,16 +1,15 @@
-# cpf_generator
+# Gerador de CPF
 
-A new Flutter project.
+Um simples gerador de CPF feito em flutter.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+![cpf_generator](https://user-images.githubusercontent.com/79954630/182473632-edc4964a-d20f-4226-a53e-f96477d08a7e.gif)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Rodando o app
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```console
+git clone https://github.com/ewertonl/cpf_generator.git
+cd cpf_generator
+flutter run
+```
