@@ -1,8 +1,7 @@
 import 'package:cpf_generator/cpf/models/cpf_model.dart';
+import 'package:cpf_generator/cpf/widgets/animated_cpf_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../utils/cpf_tools/cpf_tools.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -13,40 +12,17 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation _animation;
-
-  int _newCPF = 0;
-  int _oldCPF = Cpf.random().cpfValue;
+class _HomePageState extends State<HomePage> {
+  Cpf _newCPF = Cpf.random();
   bool _isMasked = true;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      value: _oldCPF.toDouble(),
-      duration: const Duration(seconds: 1),
-    );
-    _animation = Tween(begin: _oldCPF, end: _oldCPF).animate(_controller);
-  }
-
-  void _animateCPF() {
-    setState(() {
-      _newCPF = Cpf.random().cpfValue;
-      _animation = IntTween(
-        begin: _oldCPF,
-        end: _newCPF,
-      ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-    });
-    _oldCPF = _newCPF;
-    _controller.forward(from: 0.0);
+  void _generateNewCpf() {
+    _newCPF = Cpf.random();
+    setState(() {});
   }
 
   void _copyCPFToClipBoard() {
-    String cpfValue = _animation.value.toString().padLeft(11, '0');
+    String cpfValue = _newCPF.cpfValue.toString().padLeft(11, '0');
     Clipboard.setData(
       ClipboardData(
         text: _isMasked ? _maskCPF(cpfValue) : cpfValue,
@@ -76,30 +52,20 @@ class _HomePageState extends State<HomePage>
                   _isMasked = !_isMasked;
                   setState(() {});
                 },
+                label: const Text("Incluir pontuação"),
                 icon: _isMasked
                     ? const Icon(Icons.check_circle_rounded)
                     : const Icon(Icons.check_circle_outline_rounded),
-                label: const Text("Incluir pontuação"),
               ),
-              AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  String cpfValue =
-                      _animation.value.toString().padLeft(11, '0');
-                  String cpfString = _isMasked ? _maskCPF(cpfValue) : cpfValue;
-                  return SelectableText(
-                    cpfString,
-                    style: const TextStyle(
-                      fontFamily: 'monospace',
-                      fontSize: 27,
-                    ),
-                  );
-                },
+              AnimatedCpfText(
+                cpfDigits: _newCPF.digits,
+                isMasked: _isMasked,
+                onEnd: _copyCPFToClipBoard,
               ),
               Column(
                 children: [
                   ElevatedButton(
-                    onPressed: _animateCPF,
+                    onPressed: _generateNewCpf,
                     child: const Text("Gerar CPF"),
                   ),
                   const SizedBox(height: 14),
@@ -107,7 +73,7 @@ class _HomePageState extends State<HomePage>
                     onPressed: _copyCPFToClipBoard,
                     child: const Text("Copiar"),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 42),
                 ],
               ),
             ],
